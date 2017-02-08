@@ -40,19 +40,18 @@ int main(int argc, char *argv[]){
 
 //        printf("I am the child, ppid:%d, pid:%d\n", getppid(), getpid());
 
-
-
     }
     else{
+        int ret = 0;
         printf("PARENT started, now waiting for process %d\n", pid);
 //        printf("I am the parent, ppid:%d, pid:%d\n", getppid(),getpid());
-        wait(NULL);
-        if(WIFEXITED(NULL)){
-          const int returnStat = WEXITSTATUS(NULL);
-          printf("PARENT resumed. Child exit code of %d. Now terminating parent\n", returnStat);
+        wait(&ret);
+//        if(WIFEXITED(NULL)){
+//          const int returnStat = WEXITSTATUS(NULL);
+          printf("PARENT resumed. Child exit code of %d. Now terminating parent\n", WEXITSTATUS(ret));
         }
 
-
-    }
     return 0;
 }
+
+
